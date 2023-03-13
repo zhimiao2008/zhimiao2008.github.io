@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+    <id>https://zhimiao2008.github.io</id>
+    <title>知新温故</title>
+    <updated>2023-03-13T09:15:56.334Z</updated>
+    <generator>https://github.com/jpmonette/feed</generator>
+    <link rel="alternate" href="https://zhimiao2008.github.io"/>
+    <link rel="self" href="https://zhimiao2008.github.io/atom.xml"/>
+    <subtitle>温故而知新</subtitle>
+    <logo>https://zhimiao2008.github.io/images/avatar.png</logo>
+    <icon>https://zhimiao2008.github.io/favicon.ico</icon>
+    <rights>All rights reserved 2023, 知新温故</rights>
+    <entry>
+        <title type="html"><![CDATA[关于]]></title>
+        <id>https://zhimiao2008.github.io/about/</id>
+        <link href="https://zhimiao2008.github.io/about/">
+        </link>
+        <updated>2019-01-25T11:09:48.000Z</updated>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[Hello Gridea]]></title>
+        <id>https://zhimiao2008.github.io/hello-gridea/</id>
+        <link href="https://zhimiao2008.github.io/hello-gridea/">
+        </link>
+        <updated>2018-12-11T16:00:00.000Z</updated>
+        <summary type="html"><![CDATA[<p>👏  欢迎使用 <strong>Gridea</strong> ！<br>
+✍️  <strong>Gridea</strong> 一个静态博客写作客户端。你可以用它来记录你的生活、心情、知识、笔记、创意... ...</p>
+]]></summary>
+        <content type="html"><![CDATA[<p>👏  欢迎使用 <strong>Gridea</strong> ！<br>
+✍️  <strong>Gridea</strong> 一个静态博客写作客户端。你可以用它来记录你的生活、心情、知识、笔记、创意... ...</p>
+]]></content>
+    </entry>
+</feed>
