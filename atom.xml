@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+    <id>https://zhimiao2008.github.io</id>
+    <title>知新温故</title>
+    <updated>2023-03-15T13:02:18.516Z</updated>
+    <generator>https://github.com/jpmonette/feed</generator>
+    <link rel="alternate" href="https://zhimiao2008.github.io"/>
+    <link rel="self" href="https://zhimiao2008.github.io/atom.xml"/>
+    <subtitle>温故而知新</subtitle>
+    <logo>https://zhimiao2008.github.io/images/avatar.png</logo>
+    <icon>https://zhimiao2008.github.io/favicon.ico</icon>
+    <rights>All rights reserved 2023, 知新温故</rights>
+    <entry>
+        <title type="html"><![CDATA[CodeFormer——AI 视频去码、图片修复]]></title>
+        <id>https://zhimiao2008.github.io/codeformer/</id>
+        <link href="https://zhimiao2008.github.io/codeformer/">
+        </link>
+        <updated>2023-03-13T13:50:10.000Z</updated>
+        <summary type="html"><![CDATA[<p>最近AI确实大火，各种AI应用在各个领域大方异彩，令人眼花缭乱。作为多年码农也确实手痒痒，想着找个合适的项目练练手，刚好github上看到一个号称最强AI视频去码、照片修复的开源项目， 用来练练手正好。</p>
+<h2 id=""><img src="https://blog-1251578998.cos.ap-hongkong.myqcloud.com/img/restoration_result3.png" alt="restoration_result3" loading="lazy"></h2>
+<p>先放个图片看看效果</p>
+]]></summary>
+        <content type="html"><![CDATA[<p>最近AI确实大火，各种AI应用在各个领域大方异彩，令人眼花缭乱。作为多年码农也确实手痒痒，想着找个合适的项目练练手，刚好github上看到一个号称最强AI视频去码、照片修复的开源项目， 用来练练手正好。</p>
+<h2 id=""><img src="https://blog-1251578998.cos.ap-hongkong.myqcloud.com/img/restoration_result3.png" alt="restoration_result3" loading="lazy"></h2>
+<p>先放个图片看看效果</p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[about me]]></title>
+        <id>https://zhimiao2008.github.io/about-me/</id>
+        <link href="https://zhimiao2008.github.io/about-me/">
+        </link>
+        <updated>2023-02-01T13:26:43.000Z</updated>
+        <summary type="html"><![CDATA[<blockquote>
+<p>欢迎来到我的小站呀，很高兴遇见你！🤝</p>
+</blockquote>
+]]></summary>
+        <content type="html"><![CDATA[<blockquote>
+<p>欢迎来到我的小站呀，很高兴遇见你！🤝</p>
+</blockquote>
+]]></content>
+    </entry>
+</feed>

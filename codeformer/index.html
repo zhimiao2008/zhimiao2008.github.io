@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" >
+
+<title>CodeFormer——AI 视频去码、图片修复 | 知新温故</title>
+
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+<link rel="shortcut icon" href="https://zhimiao2008.github.io/favicon.ico?v=1678885290617">
+<link rel="stylesheet" href="https://zhimiao2008.github.io/styles/main.css">
+
+
+  
+
+  
+    <link rel="stylesheet" href="https://unpkg.com/disqusjs@1.1/dist/disqusjs.css" />
+  
+
+
+<link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+
+
+    <meta name="description" content="最近AI确实大火，各种AI应用在各个领域大方异彩，令人眼花缭乱。作为多年码农也确实手痒痒，想着找个合适的项目练练手，刚好github上看到一个号称最强AI视频去码、照片修复的开源项目， 用来练练手正好。
+
+先放个图片看看效果
+
+
+
+Gith..." />
+    <meta name="keywords" content="AI,CodeFormer" />
+  </head>
+  <body>
+    <div id="app" class="main">
+
+      <div class="sidebar" :class="{ 'full-height': menuVisible }">
+  <div class="top-container" data-aos="fade-right">
+    <div class="top-header-container">
+      <a class="site-title-container" href="https://zhimiao2008.github.io">
+        <img src="https://zhimiao2008.github.io/images/avatar.png?v=1678885290617" class="site-logo">
+        <h1 class="site-title">知新温故</h1>
+      </a>
+      <div class="menu-btn" @click="menuVisible = !menuVisible">
+        <div class="line"></div>
+      </div>
+    </div>
+    <div>
+      
+        
+          <a href="/" class="site-nav">
+            首页
+          </a>
+        
+      
+        
+          <a href="/archives" class="site-nav">
+            归档
+          </a>
+        
+      
+        
+          <a href="/tags" class="site-nav">
+            标签
+          </a>
+        
+      
+        
+          <a href="https://zhimiao2008.github.io/about-me" class="site-nav">
+            关于
+          </a>
+        
+      
+    </div>
+  </div>
+  <div class="bottom-container" data-aos="flip-up" data-aos-offset="0">
+    <div class="social-container">
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    </div>
+    <div class="site-description">
+      温故而知新
+    </div>
+    <div class="site-footer">
+      Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a> | <a class="rss" href="https://zhimiao2008.github.io/atom.xml" target="_blank">RSS</a>
+    </div>
+  </div>
+</div>
+
+
+      <div class="main-container">
+        <div class="content-container" data-aos="fade-up">
+          <div class="post-detail">
+            <h2 class="post-title">CodeFormer——AI 视频去码、图片修复</h2>
+            <div class="post-date">2023-03-13</div>
+            
+            <div class="post-content" v-pre>
+              <p>最近AI确实大火，各种AI应用在各个领域大方异彩，令人眼花缭乱。作为多年码农也确实手痒痒，想着找个合适的项目练练手，刚好github上看到一个号称最强AI视频去码、照片修复的开源项目， 用来练练手正好。</p>
+<h2 id=""><img src="https://blog-1251578998.cos.ap-hongkong.myqcloud.com/img/restoration_result3.png" alt="restoration_result3" loading="lazy"></h2>
+<p>先放个图片看看效果</p>
+<!-- more -->
+<blockquote>
+<ul>
+<li>Github：https://github.com/sczhou/CodeFormer</li>
+<li>Paper： https://arxiv.org/abs/2206.11253</li>
+<li>Project Page: https://shangchenzhou.com/projects/CodeFormer/</li>
+<li>Video: https://youtu.be/d3VDpkXlueI</li>
+</ul>
+</blockquote>
+<h2 id="codeformer介绍">codeFormer介绍</h2>
+<p>CodeFormer 是在NeurIPS 2022上，由南洋理工大学-商汤科技联合研究中心S-Lab提出了一种基于VQGAN+Transformer的人脸复原模型</p>
+<h2 id="依赖准备">依赖准备</h2>
+<h3 id="服务器准备">服务器准备</h3>
+<p>腾讯云服务器</p>
+<blockquote>
+<ul>
+<li>实例： GPU计算型GN7，8核32G</li>
+<li>GPU：1 * NVIDIA T4</li>
+<li>操作系统：Ubuntu Server 20.04 LTS 64位<br>
+GPU驱动版本 450.102.04、CUDA版本 11.0.3、cuDNN版本 8.1.0</li>
+</ul>
+</blockquote>
+<h3 id="环境准备">环境准备</h3>
+<h4 id="环境依赖">环境依赖</h4>
+<ul>
+<li>Pytorch &gt;= 1.7.1</li>
+<li>CUDA &gt;= 10.1</li>
+<li>Anaconda</li>
+<li>Other required packages in <code>requirements.txt</code></li>
+</ul>
+<blockquote>
+<p>PyTorch 是由 Facebook 开发，基于 Torch 开发，从并不常用的 Lua 语言转为 Python 语言开发的深度学习框架，Torch 是 TensorFlow 开源前非常出名的一个深度学习框架，而 PyTorch 在开源后由于其使用简单，动态计算图的特性得到非常多的关注，并且成为了 TensorFlow 的 最大竞争对手。</p>
+</blockquote>
+<blockquote>
+<p>统一计算设备架构（Compute Unified Device Architecture, CUDA），是由NVIDIA推出的通用并行计算架构。解决的是用更加廉价的设备资源，实现更高效的并行计算。</p>
+</blockquote>
+<blockquote>
+<p>Anaconda是一个软件发行版。软件发行版是一个预先建立和配置好的packages的集合，可以被安装在操作系统上，并被使用。Anaconda是由Anaconda公司开发的，一个包含PyData生态中的核心软件的完全发行版，它包含了Python本身和数百个第三方开源项目的二进制文件，例如conda、numpy、scipy、ipython等。<br>
+Conda是一个包和环境管理工具。包管理工具是一个用来自动化安装、升级、删除packages的工具。由于Conda拥有“conda install“、”conda update“、”conda remove“等子命令，它完全符合包管理工具的定义。</p>
+</blockquote>
+<h4 id="环境安装过程">环境安装过程</h4>
+<ol>
+<li><strong>conda 安装</strong></li>
+</ol>
+<blockquote>
+<p>Anaconda Installers: https://www.anaconda.com/products/distribution#Downloads</p>
+</blockquote>
+<pre><code class="language-bash">ubuntu@VM-32-5-ubuntu:~$ wget https://repo.anaconda.com/archive/Anaconda3-2022.10-Linux-x86_64.sh
+ubuntu@VM-32-5-ubuntu:~$ sudo bash ./Anaconda3-2022.10-Linux-x86_64.sh
+Welcome to Anaconda3 2022.10
+
+In order to continue the installation process, please review the license
+agreement.
+Please, press ENTER to continue
+&gt;&gt;&gt;
+....
+
+Do you accept the license terms? [yes|no]
+[no] &gt;&gt;&gt; yes
+....
+
+Anaconda3 will now be installed into this location:
+/root/anaconda3
+
+  - Press ENTER to confirm the location
+  - Press CTRL-C to abort the installation
+  - Or specify a different location below
+
+[/root/anaconda3] &gt;&gt;&gt; /usr/local/anaconda3
+PREFIX=/usr/local/anaconda3
+...
+
+Preparing transaction: done
+Executing transaction: -
+
+    Installed package of scikit-learn can be accelerated using scikit-learn-intelex.
+    More details are available here: https://intel.github.io/scikit-learn-intelex
+
+    For example:
+
+        $ conda install scikit-learn-intelex
+        $ python -m sklearnex my_application.py
+
+
+
+done
+installation finished.
+Do you wish the installer to initialize Anaconda3
+by running conda init? [yes|no]
+[no] &gt;&gt;&gt; yes
+modified      /usr/local/anaconda3/condabin/conda
+modified      /usr/local/anaconda3/bin/conda
+modified      /usr/local/anaconda3/bin/conda-env
+no change     /usr/local/anaconda3/bin/activate
+no change     /usr/local/anaconda3/bin/deactivate
+no change     /usr/local/anaconda3/etc/profile.d/conda.sh
+no change     /usr/local/anaconda3/etc/fish/conf.d/conda.fish
+no change     /usr/local/anaconda3/shell/condabin/Conda.psm1
+no change     /usr/local/anaconda3/shell/condabin/conda-hook.ps1
+no change     /usr/local/anaconda3/lib/python3.9/site-packages/xontrib/conda.xsh
+no change     /usr/local/anaconda3/etc/profile.d/conda.csh
+modified      /root/.bashrc
+
+==&gt; For changes to take effect, close and re-open your current shell. &lt;==
+
+If you'd prefer that conda's base environment not be activated on startup,
+   set the auto_activate_base parameter to false:
+
+conda config --set auto_activate_base false
+
+Thank you for installing Anaconda3!
+
+===========================================================================
+
+Working with Python and Jupyter is a breeze in DataSpell. It is an IDE
+designed for exploratory data analysis and ML. Get better data insights
+with DataSpell.
+
+DataSpell for Anaconda is available at: https://www.anaconda.com/dataspell
+
+</code></pre>
+<p>安装器默认给 root 增加了环境变量，我们需要手动给当前用户 也添加一下， 将下面代码 追加到 ~/.bashrc 文件中</p>
+<pre><code class="language-bash">vi ~/.bashrc
+# &gt;&gt;&gt; conda initialize &gt;&gt;&gt;
+# !! Contents within this block are managed by 'conda init' !!
+__conda_setup=&quot;$('/usr/local/anaconda3/bin/conda' 'shell.bash' 'hook' 2&gt; /dev/null)&quot;
+if [ $? -eq 0 ]; then
+    eval &quot;$__conda_setup&quot;
+else
+    if [ -f &quot;/usr/local/anaconda3/etc/profile.d/conda.sh&quot; ]; then
+        . &quot;/usr/local/anaconda3/etc/profile.d/conda.sh&quot;
+    else
+        export PATH=&quot;/usr/local/anaconda3/bin:$PATH&quot;
+    fi
+fi
+unset __conda_setup
+# &lt;&lt;&lt; conda initialize &lt;&lt;&lt;
+
+# 重新加载环境变量
+ubuntu@VM-32-5-ubuntu:~$ source .bashrc
+(base) ubuntu@VM-32-5-ubuntu:~$
+</code></pre>
+<ol start="2">
+<li><strong>pytorch 安装</strong></li>
+</ol>
+<p>在python中安装深度学习库(pytorch),driver依赖显卡，cuda依赖driver，pytorch依赖cuda,于是就会有一些版本依赖问题.</p>
+<p>首先，查看显卡驱动和 cuda 对应的版本</p>
+<pre><code class="language-bash">ubuntu@VM-32-5-ubuntu:~/CodeFormer$ nvidia-smi
+Tue Mar 14 21:08:38 2023
++-----------------------------------------------------------------------------+
+| NVIDIA-SMI 450.102.04   Driver Version: 450.102.04   CUDA Version: 11.0     |
+|-------------------------------+----------------------+----------------------+
+....
+</code></pre>
+<p>查询深度学习库（参考pytorch：https://pytorch.org/get-started/previous-versions/）的版本对cuda的依赖关系, 我们找到对应的版本</p>
+<pre><code class="language-bash"># CUDA 11.0
+conda install pytorch==1.7.1 torchvision==0.8.2 torchaudio==0.7.2 cudatoolkit=11.0 -c pytorch
+
+# CPU Only
+conda install pytorch==1.7.1 torchvision==0.8.2 torchaudio==0.7.2 cpuonly -c pytorch
+</code></pre>
+<p>通过 conda 安装 pytorch 库</p>
+<pre><code class="language-bash">(base) ubuntu@VM-32-5-ubuntu:~$ conda install pytorch==1.7.1 torchvision==0.8.2 torchaudio==0.7.2 cudatoolkit=11.0 -c pytorch
+</code></pre>
+<h2 id="codeformer-运行">CodeFormer 运行</h2>
+<h3 id="初始化">初始化</h3>
+<ul>
+<li>下载项目</li>
+</ul>
+<pre><code class="language-bash"># git clone this repository
+(base) ubuntu@VM-32-5-ubuntu git clone https://github.com/sczhou/CodeFormer.git
+(base) ubuntu@VM-32-5-ubuntu:~$ cd CodeFormer/
+
+# create new anaconda env
+(base) ubuntu@VM-32-5-ubuntu:~/CodeFormer$ conda create -n codeformer python=3.8 -y
+#
+# To activate this environment, use
+#
+#     $ conda activate codeformer
+#
+# To deactivate an active environment, use
+#
+#     $ conda deactivate
+
+(base) ubuntu@VM-32-5-ubuntu:~/CodeFormer$ conda activate codeformer
+(codeformer) ubuntu@VM-32-5-ubuntu:~/CodeFormer$
+
+# install python dependencies
+(codeformer) ubuntu@VM-32-5-ubuntu:~/CodeFormer$ pip3 install -r requirements.txt
+(codeformer) ubuntu@VM-32-5-ubuntu:~/CodeFormer$ python basicsr/setup.py develop
+(codeformer) ubuntu@VM-32-5-ubuntu:~/CodeFormer$ conda install -c conda-forge dlib
+</code></pre>
+<ul>
+<li>模型下载</li>
+</ul>
+<pre><code class="language-bash">(codeformer) ubuntu@VM-32-5-ubuntu:~/CodeFormer$ python scripts/download_pretrained_models.py facelib
+(codeformer) ubuntu@VM-32-5-ubuntu:~/CodeFormer$ python scripts/download_pretrained_models.py dlib
+</code></pre>
+<pre><code class="language-bash">(codeformer) ubuntu@VM-32-5-ubuntu:~/CodeFormer$ python scripts/download_pretrained_models.py CodeFormer
+</code></pre>
+<h3 id="运行模型">运行模型</h3>
+<ul>
+<li>面部修复</li>
+</ul>
+<pre><code>(codeformer) ubuntu@VM-32-5-ubuntu:~/CodeFormer$ python inference_codeformer.py -w 0.5 --has_aligned --input_path inputs/cropped_faces/
+Background upsampling: False, Face upsampling: False
+[1/20] Processing: 0143.png
+...
+[20/20] Processing: Solvay_conference_1927_2_16.png
+
+All results are saved in results/cropped_faces_0.5
+
+</code></pre>
+<p>我们下载处理前和处理后的图片做一下对比：</p>
+<pre><code class="language-bash">(codeformer) ubuntu@VM-32-5-ubuntu:~/CodeFormer$ sz inputs/cropped_faces/0143.png
+(codeformer) ubuntu@VM-32-5-ubuntu:~/CodeFormer$ sz results/cropped_faces_0.5/restored_faces/0143.png
+</code></pre>
+<table>
+<thead>
+<tr>
+<th><img src="https://blog-1251578998.cos.ap-hongkong.myqcloud.com/img/0143.png" alt="befer" loading="lazy"></th>
+<th><img src="https://blog-1251578998.cos.ap-hongkong.myqcloud.com/img/0143-1.png" alt="after" loading="lazy"></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>before</td>
+<td>after</td>
+</tr>
+</tbody>
+</table>
+<p>前后对比效果非常明显！！！</p>
+<p>我们尝试上传自定义 照片，看一看效果</p>
+<pre><code class="language-bash">(codeformer) ubuntu@VM-32-5-ubuntu:~/CodeFormer$ mkdir inputs/custom
+(codeformer) ubuntu@VM-32-5-ubuntu:~/CodeFormer$ cd inputs/custom
+(codeformer) ubuntu@VM-32-5-ubuntu:~/CodeFormer/inputs/custom$ rz -ybe
+(codeformer) ubuntu@VM-32-5-ubuntu:~/CodeFormer/inputs/custom$ ll
+total 144
+drwxrwxr-x 2 ubuntu ubuntu   4096 Mar 14 22:10 ./
+drwxrwxr-x 5 ubuntu ubuntu   4096 Mar 14 22:10 ../
+-rw-r--r-- 1 ubuntu ubuntu 137211 Mar 14 21:59 ceynhxBavmx1E.jpg
+(codeformer) ubuntu@VM-32-5-ubuntu:~/CodeFormer/inputs/custom$ cd ../..
+(codeformer) ubuntu@VM-32-5-ubuntu:~/CodeFormer$ python inference_codeformer.py -w 0.5 --has_aligned --input_path inputs/custom/
+Background upsampling: False, Face upsampling: False
+[1/1] Processing: ceynhxBavmx1E.jpg
+
+All results are saved in results/custom_0.5
+(codeformer) ubuntu@VM-32-5-ubuntu:~/CodeFormer$ sz results/custom_0.5/restored_faces/ceynhxBavmx1E.png
+</code></pre>
+<table>
+<thead>
+<tr>
+<th><img src="https://blog-1251578998.cos.ap-hongkong.myqcloud.com/img/ceynhxBavmx1E.jpg" alt="" loading="lazy"></th>
+<th><img src="https://blog-1251578998.cos.ap-hongkong.myqcloud.com/img/ceynhxBavmx1-1E.png" alt="" loading="lazy"></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>before</td>
+<td>after</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>整体图像增强</li>
+</ul>
+<pre><code># For whole image
+# Add '--bg_upsampler realesrgan' to enhance the background regions with Real-ESRGAN
+# Add '--face_upsample' to further upsample restorated face with Real-ESRGAN
+(codeformer) ubuntu@VM-32-5-ubuntu:~/CodeFormer$ python inference_codeformer.py -w 0.7 --input_path inputs/whole_imgs/
+Face detection model: retinaface_resnet50
+Background upsampling: False, Face upsampling: False
+[1/7] Processing: 00.jpg
+	detect 4 faces
+...
+[7/7] Processing: 06.png
+	detect 2 faces
+
+All results are saved in results/whole_imgs_0.7
+</code></pre>
+<ul>
+<li>视频增强</li>
+</ul>
+<pre><code># For Windows/Mac users, please install ffmpeg first
+conda install -c conda-forge ffmpeg
+
+# For video clips
+# video path should end with '.mp4'|'.mov'|'.avi'
+python inference_codeformer.py --bg_upsampler realesrgan --face_upsample -w 1.0 --input_path [video path]
+</code></pre>
+<p>over ~</p>
+<h2 id="相关链接">相关链接</h2>
+<ul>
+<li>https://replicate.com/sczhou/codeformer/api</li>
+<li>https://github.com/sczhou/CodeFormer</li>
+</ul>
+
+            </div>
+            
+              <div class="tag-container">
+                
+                  <a href="https://zhimiao2008.github.io/tag/p2h8JZPSA/" class="tag">
+                    AI
+                  </a>
+                
+                  <a href="https://zhimiao2008.github.io/tag/qIieQtX8pj/" class="tag">
+                    CodeFormer
+                  </a>
+                
+              </div>
+            
+            
+              <div class="next-post">
+                <div class="next">下一篇</div>
+                <a href="https://zhimiao2008.github.io/about-me/">
+                  <h3 class="post-title">
+                    about me
+                  </h3>
+                </a>
+              </div>
+            
+
+            
+              
+
+              
+                <div id="disqus_thread" data-aos="fade-in"></div>
+              
+            
+
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+<script type="application/javascript">
+
+AOS.init();
+
+var app = new Vue({
+  el: '#app',
+  data: {
+    menuVisible: false,
+  },
+})
+
+</script>
+
+
+
+
+
+  
+
+  
+    <script src="https://unpkg.com/disqusjs@1.1/dist/disqus.js"></script>
+    <script>
+
+    var options = {
+      shortname: 'wahaha',
+      apikey: 'DtY3KPS6PsHXibcDYYx5ICyK8Cbsskooa7uWtnSJ3BasKT8kbgrnyB3EfLIUjDTR',
+    }
+    if ('https://disqus.skk.moe/disqus/') {
+      options.api = 'https://disqus.skk.moe/disqus/'
+    }
+    var dsqjs = new DisqusJS(options)
+
+    </script>
+  
+
+
+
+
+<script type="text/javascript" charset="utf-8"  src="https://xy-1251578998.file.myqcloud.com/blog/js/L2Dwidget.min.js"></script>
+<script type="text/javascript" charset="utf-8"  src="https://xy-1251578998.file.myqcloud.com/blog/js/L2Dwidget.0.min.js"></script>
+<script type="text/javascript">
+L2Dwidget.init({
+    "dialog": {
+        "enable": true,
+        "script": {
+            //每20s，显示一言（调用一言Api返回的句子）
+            'every idle 20s': '$hitokoto$',
+            //触摸到身体
+            'tap body': '请问你是要找小名鼎鼎的丁丁嘛',
+            //触摸到头部
+            'tap face': '想我的时候你就摸摸头~'
+      }
+    },
+    mobile: {
+        show: false,
+   },
+   display: {
+        superSample: 5,
+        width: 200,
+        height: 400,
+        position: "right",
+        hOffset: 0,
+        vOffset: -20
+    }
+});
+</script>
+
+  </body>
+</html>

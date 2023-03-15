@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" >
+
+<title>文章归档 | 知新温故</title>
+
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+<link rel="shortcut icon" href="https://zhimiao2008.github.io/favicon.ico?v=1678885290617">
+<link rel="stylesheet" href="https://zhimiao2008.github.io/styles/main.css">
+
+
+
+<link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+
+
+    <meta name="description" content="温故而知新">
+  </head>
+  <body>
+    <div id="app" class="main">
+
+      <div class="sidebar" :class="{ 'full-height': menuVisible }">
+  <div class="top-container" data-aos="fade-right">
+    <div class="top-header-container">
+      <a class="site-title-container" href="https://zhimiao2008.github.io">
+        <img src="https://zhimiao2008.github.io/images/avatar.png?v=1678885290617" class="site-logo">
+        <h1 class="site-title">知新温故</h1>
+      </a>
+      <div class="menu-btn" @click="menuVisible = !menuVisible">
+        <div class="line"></div>
+      </div>
+    </div>
+    <div>
+      
+        
+          <a href="/" class="site-nav">
+            首页
+          </a>
+        
+      
+        
+          <a href="/archives" class="site-nav">
+            归档
+          </a>
+        
+      
+        
+          <a href="/tags" class="site-nav">
+            标签
+          </a>
+        
+      
+        
+          <a href="https://zhimiao2008.github.io/about-me" class="site-nav">
+            关于
+          </a>
+        
+      
+    </div>
+  </div>
+  <div class="bottom-container" data-aos="flip-up" data-aos-offset="0">
+    <div class="social-container">
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    </div>
+    <div class="site-description">
+      温故而知新
+    </div>
+    <div class="site-footer">
+      Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a> | <a class="rss" href="https://zhimiao2008.github.io/atom.xml" target="_blank">RSS</a>
+    </div>
+  </div>
+</div>
+
+
+      <div class="main-container">
+        <div class="content-container" data-aos="fade-up">
+          
+
+          <h2 class="archives-title">文章归档</h2>
+          <div class="archives-container">
+            
+              <h2 class="year" data-aos="fade-in" data-aos-delay="500">2023</h2>
+              
+                
+                  <article class="post">
+                    <a href="https://zhimiao2008.github.io/codeformer/">
+                      <h2 class="post-title">
+                        CodeFormer——AI 视频去码、图片修复
+                      </h2>
+                    </a>
+                  </article>
+                
+              
+                
+                  <article class="post">
+                    <a href="https://zhimiao2008.github.io/about-me/">
+                      <h2 class="post-title">
+                        about me
+                      </h2>
+                    </a>
+                  </article>
+                
+              
+            
+          </div>
+
+          <div class="pagination-container">
+  
+  
+</div>
+
+        </div>
+      </div>
+    </div>
+
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+<script type="application/javascript">
+
+AOS.init();
+
+var app = new Vue({
+  el: '#app',
+  data: {
+    menuVisible: false,
+  },
+})
+
+</script>
+
+
+
+
+
+
+<script type="text/javascript" charset="utf-8"  src="https://xy-1251578998.file.myqcloud.com/blog/js/L2Dwidget.min.js"></script>
+<script type="text/javascript" charset="utf-8"  src="https://xy-1251578998.file.myqcloud.com/blog/js/L2Dwidget.0.min.js"></script>
+<script type="text/javascript">
+L2Dwidget.init({
+    "dialog": {
+        "enable": true,
+        "script": {
+            //每20s，显示一言（调用一言Api返回的句子）
+            'every idle 20s': '$hitokoto$',
+            //触摸到身体
+            'tap body': '请问你是要找小名鼎鼎的丁丁嘛',
+            //触摸到头部
+            'tap face': '想我的时候你就摸摸头~'
+      }
+    },
+    mobile: {
+        show: false,
+   },
+   display: {
+        superSample: 5,
+        width: 200,
+        height: 400,
+        position: "right",
+        hOffset: 0,
+        vOffset: -20
+    }
+});
+</script>
+
+  </body>
+</html>
